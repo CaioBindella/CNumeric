@@ -1,5 +1,9 @@
 # from sympy import diff, Symbol
 
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import fsolve
+
 a = float(input('Entre com o valor 1: '))
 b = float(input('Entre com o valor 2: '))
 epislon = float(input('Entre com o valor E: '))
@@ -27,6 +31,9 @@ def CalcXn(x , y, z):
 # diff(flx, x)
 
 
+VarXf = np.linspace(a-1, b+1, 100)
+VarYf = VarXf**3 - 2*(VarXf**2) - 5
+
 a = CalcFunc(a)
 b = CalcFunc(b)
 flx = CalcDeriv(x_0)
@@ -34,6 +41,7 @@ flx = CalcDeriv(x_0)
 Xn1 = CalcXn(x_0, b, flx)
 
 Xn = Xn1
+
 
 while fn > epislon:
     #calcula f(xn)
@@ -46,6 +54,10 @@ while fn > epislon:
     interections = interections + 1
     
 
-print(fn)
-print(fln)
-print(interections)
+print(f'Valor da F(x) = {fn}')
+print(f'Valor da F(x)linha = {fln}')
+print(f"iterections = {interections}")
+
+plt.plot(VarXf, VarYf)
+
+

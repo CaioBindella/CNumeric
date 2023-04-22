@@ -1,17 +1,19 @@
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 
 a = float(input('Entre com o valor 1: '))
 b = float(input('Entre com o valor 2: '))
 epislon = float(input('Entre com o valor E: '))
+funcao = "((x**3) - 9*(x) + 3)"
 
+Ainicial = a
+Binicial = b
 count = 0
 tol = 0
 
 def Calc(x):
-    return ((x**3) - 7*(x**2) + 14*(x) - 6)
-
-# def Interacoes( y, z, E):
-#     return (((math.log(y*z)) - math.log(E))/math.log(2))
+    return (eval(funcao))
 
 def CalcTol(x, y):
     return (abs(y - x)) 
@@ -20,6 +22,9 @@ def CalcTol(x, y):
 inter = 0
 f_a = Calc(a)
 f_b = Calc(b)
+
+VarXf = np.linspace(a-1, b+1, 100)
+VarYf = VarXf**3 - 9*VarXf + 3
 
 tol = CalcTol(a, b)
 
@@ -37,7 +42,18 @@ while(tol > epislon):
     inter = inter + 1
     tol = CalcTol(a, b)        
 
-print(f'Range of possible solutions: [{a:.4f}, {b:.4f}]')
-print(f'Total of iterations: {inter:.1f}')
+    print(f'Iteracao {inter:.1f}')
+    print(f'Valor de a= {a:.4f}')
+    print(f'Valor de b= {b:.4f}')
 
+
+plt.grid()
+plt.scatter(a, Calc(a), c='black')
+plt.scatter(b, Calc(b), c='black')
+#################
+plt.scatter(Ainicial, Calc(Ainicial), c='brown')
+plt.scatter(Binicial, Calc(Binicial), c='brown')
+#################
+plt.title('Grafico Bissecao' + funcao)
+plt.plot(VarXf, VarYf, c='green')
 
