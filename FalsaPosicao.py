@@ -1,7 +1,9 @@
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 
 def Calc(x):
-    return ((x**4) - (14*(x**2)) + 24*(x) - 10)
+    return ((x**3) - (9 * x) + (3))
 
 def Fake(a, b, epsilon, max_iter):
     x_k_1 = a
@@ -18,10 +20,18 @@ def Fake(a, b, epsilon, max_iter):
         print("Não foi possível encontrar uma raiz dentro do número máximo de iterações")
     else:
         print(f"A raiz é: {x_k} após {count} iterações")
+        return RaizK
 
 a = float(input('Entre com o valor 1: '))
 b = float(input('Entre com o valor 2: '))
 epsilon = float(input('Entre com o valor E: '))
 max_iter = int(input('Entre com o número máximo de iterações: '))
 
-Fake(a, b, epsilon, max_iter)
+RaizK = Fake(a, b, epsilon, max_iter)
+
+VarXf = np.linspace(a-1, b+1, 100)
+VarYf = ((VarXf**3) - (9 * VarXf) + (3))
+
+plt.grid()
+plt.scatter(RaizK, Calc(RaizK), c='blue')
+plt.plot(VarXf, VarYf, c='green')

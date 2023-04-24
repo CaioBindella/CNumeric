@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 a = float(input('Entre com o valor 1: '))
 b = float(input('Entre com o valor 2: '))
 
@@ -21,11 +24,17 @@ def secante(f, x0, x1, tol, max_iter):
 
 
 def f(x):
-    return ((x**3) - 2*(x**2) - 5)
+    return ((x**3) - (2*(x**2)) - 5)
 
 max_iter = 100
 
+VarXf = np.linspace(a-1, b+1, 100)
+VarYf = ((VarXf**3) - 2*(VarXf**2) - 5)
+
 raiz = secante(f, x0, x1, tol, max_iter)
 
-print(f'Raiz: {raiz}')
+print(f'Raiz {raiz:.4f}')
 
+plt.grid()
+plt.scatter(raiz, f(raiz), c='blue')
+plt.plot(VarXf, VarYf, c='green')
